@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>HÁREK – Inventura alkoholu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>HÁREK</h1>
+        <form>
+            <label for="drink">Značka alkoholu:</label>
+            <select id="drink">
+                <option>Božkov Tuzemák 1l</option>
+                <option>Jägermeister 1l</option>
+                <option>Finlandia 1l</option>
+                <option>Jack Daniels 1l</option>
+            </select>
+
+            <label for="level">Hladina (0–100 %):</label>
+            <input type="range" id="level" min="0" max="100" value="100" oninput="updateOutput()">
+            <p>Zbývá: <span id="output">1.00</span> l</p>
+
+            <label for="staff">Obsluha:</label>
+            <input type="text" id="staff" placeholder="Jméno">
+
+            <label for="note">Poznámka:</label>
+            <textarea id="note" placeholder="Poznámka k měření..."></textarea>
+
+            <button type="submit">Odeslat</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
