@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>HÁREK – Inventura</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+    .bottle-container { position: relative; display: inline-block; }
+    .bottle-img { width: 200px; }
+    .slider-container { margin: 20px 0; }
+    .output { font-size: 18px; margin: 10px 0; }
+    label { font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>HÁREK – Inventura alkoholu</h1>
+
+  <label for="brand">Značka alkoholu:</label><br>
+  <input type="text" id="brand" name="brand" list="brands" placeholder="Začni psát...">
+  <datalist id="brands">
+    <option value="Jack Daniels Apple – 1 l">
+    <option value="Finlandia – 1 l">
+    <option value="Jägermeister – 1 l">
+    <option value="Božkov Tuzemák – 1 l">
+  </datalist>
+
+  <div class="bottle-container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Jack_Daniel%27s_Tennessee_Apple.png" alt="Jack Daniels Apple" class="bottle-img">
+  </div>
+
+  <div class="slider-container">
+    <label for="slider">Množství v aktuální lahvi (l):</label><br>
+    <input type="range" id="slider" name="slider" min="0" max="1" step="0.01" value="0.00" oninput="updateOutput()">
+    <div class="output">Hladina: <span id="sliderValue">0.00</span> l</div>
+  </div>
+
+  <div>
+    <label for="fullBottles">Počet plných lahví skladem:</label><br>
+    <input type="number" id="fullBottles" name="fullBottles" min="0" value="0" onchange="updateTotal()">
+  </div>
+
+  <div class="output">Celkem: <span id="totalLiters">0.00</span> l</div>
+
+  <script>
+    function updateOutput() {
+      const slider = document.getElementById('slider');
+      document.getElementById('sliderValue').innerText = parseFloat(slider.value).toFixed(2);
+      updateTotal();
+    }
+
+    function updateTotal() {
+      const slider = parseFloat(document.getElementById('slider').value);
+      const fullBottles = parseInt(document.getElementById('fullBottles').value) || 0;
+      const total = (fullBottles + slider).toFixed(2);
+      document.getElementById('totalLiters').innerText = total;
+    }
+  </script>
+
+</body>
+</html>
