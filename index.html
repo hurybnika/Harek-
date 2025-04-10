@@ -1,36 +1,66 @@
-
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>HÁREK – Inventura alkoholu</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            color: #111;
+        }
+        .bottle {
+            width: 80px;
+            height: 200px;
+            border: 2px solid #333;
+            border-radius: 20px;
+            margin: 10px 0;
+            position: relative;
+            background: linear-gradient(to top, #00bfff 0%, transparent 0%);
+        }
+        .form-group {
+            margin-bottom: 12px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>HÁREK</h1>
-        <form>
+    <h1>HÁREK</h1>
+    <form method="POST" action="https://formspree.io/f/mnnplzbp">
+        <div class="form-group">
             <label for="drink">Značka alkoholu:</label>
-            <select id="drink">
+            <select id="drink" name="Značka">
                 <option>Božkov Tuzemák 1l</option>
                 <option>Jägermeister 1l</option>
                 <option>Finlandia 1l</option>
                 <option>Jack Daniels 1l</option>
             </select>
+        </div>
+        <div class="form-group">
+            <label for="level">Hladina (0.00–1.00 l):</label>
+            <input type="number" id="level" name="Hladina" min="0" max="1" step="0.01" value="1.00" onchange="updateBottle()" />
+        </div>
+        <div class="bottle" id="bottle"></div>
+        <div class="form-group">
+            <label for="obsluha">Obsluha:</label>
+            <input type="text" id="obsluha" name="Obsluha" placeholder="Jméno" required />
+        </div>
+        <div class="form-group">
+            <label for="pozn">Poznámka:</label>
+            <input type="text" id="pozn" name="Poznámka" placeholder="Poznámka k měření..." />
+        </div>
+        <button type="submit">Odeslat</button>
+    </form>
 
-            <label for="level">Hladina (0–100 %):</label>
-            <input type="range" id="level" min="0" max="100" value="100" oninput="updateOutput()">
-            <p>Zbývá: <span id="output">1.00</span> l</p>
-
-            <label for="staff">Obsluha:</label>
-            <input type="text" id="staff" placeholder="Jméno">
-
-            <label for="note">Poznámka:</label>
-            <textarea id="note" placeholder="Poznámka k měření..."></textarea>
-
-            <button type="submit">Odeslat</button>
-        </form>
-    </div>
-    <script src="script.js"></script>
+    <script>
+        function updateBottle() {
+            const bottle = document.getElementById("bottle");
+            const level = parseFloat(document.getElementById("level").value);
+            const percent = Math.min(Math.max(level / 1 * 100, 0), 100);
+            bottle.style.background = "linear-gradient(to top, #00bfff " + percent + "%, transparent " + percent + "%)";
+        }
+        updateBottle();
+    </script>
 </body>
 </html>
