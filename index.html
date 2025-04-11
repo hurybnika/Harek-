@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>INVENTURA ALKOHOLU</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .bottle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .bottle-container img {
+            width: 100px;
+        }
+        .slider-vertical {
+            writing-mode: bt-lr; /* vertical slider */
+            -webkit-appearance: slider-vertical;
+            width: 8px;
+            height: 150px;
+        }
+        .submit-btn {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            margin-top: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>INVENTURA ALKOHOLU</h1>
+        <form action="https://formspree.io/f/mnnpbzph" method="POST">
+            <label for="drink">Značka alkoholu:</label>
+            <input type="text" name="drink" id="drink" list="drinks" placeholder="Začni psát...">
+            <datalist id="drinks">
+                <option value="Jack Daniels 1l">
+                <option value="Finlandia 1l">
+            </datalist>
+
+            <div class="bottle-container">
+                <img src="bottle_silhouette.png" alt="Láhev">
+                <input type="range" min="0" max="1" step="0.01" value="0.5" class="slider-vertical" name="hladina" oninput="outputHladina.value = this.value">
+            </div>
+            <output name="outputHladina">0.5</output> l
+
+            <label for="sklad">Počet plných lahví skladem:</label>
+            <input type="number" name="sklad" id="sklad" min="0" step="1" value="0">
+
+            <label for="obsluha">Jméno obsluhy:</label>
+            <input type="text" name="obsluha" id="obsluha" required>
+
+            <label for="poznamka">Poznámka:</label>
+            <textarea name="poznamka" id="poznamka" rows="2"></textarea>
+
+            <button type="submit" class="submit-btn">Odeslat inventuru</button>
+        </form>
+    </div>
+</body>
+</html>
